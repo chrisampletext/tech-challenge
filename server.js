@@ -21,38 +21,78 @@ app.post('/login', function(req,res){
 
 
 app.get('/users',function(req,res){
+  try{
 
-  res.json(users);  
+    res.json(users);  
+
+  }catch{
+
+    res.sendStatus(404);
+
+  }
 
 });
 
 app.get('/albums',authen, function(req,res){
 
+  try{
+
   res.json(albums.filter(albums=>albums.userId == req.this_user.userId));  
+  
+  }catch{
+
+    res.sendStatus(404);
+
+  }
 
 });
 
 
 app.get('/photos',authen, function(req,res){
 
+  try{
+
   res.json(photos.filter(photos=>photos.albumId == req.this_user.userId));  
+
+  }catch{
+
+    res.sendStatus(404);
+
+  }
 
 });
 
 
 app.get('/albums/:id',authen,function(req,res){
 
-  let id = req.params.id;
-  console.log(id);
-  res.json(albums.filter(albums=>albums.id == id));  
+  try{
+
+    let id = req.params.id;
+    console.log(id);
+    res.json(albums.filter(albums=>albums.id == id));  
+
+  }catch{
+
+    res.sendStatus(404);
+
+  }
 
 });
 
 
 app.get('/photos/:id',authen,function(req,res){
 
-  let id = req.params.id;
-  res.json(photos.filter(photos=>photos.id == id));  
+  try{
+    
+    let id = req.params.id;
+    res.json(photos.filter(photos=>photos.id == id));  
+  
+  }catch{
+
+    res.sendStatus(404);
+
+  }
+
 
 });
 
